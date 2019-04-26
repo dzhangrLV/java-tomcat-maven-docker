@@ -11,7 +11,7 @@ RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
 RUN set -eux; \
     \
     cd "$BOXFUSE/boxfuse-sample-java-war-hello/"; \
-    mvn package; \
+    mvn package
 
 
 # see https://github.com/docker-library/tomcat
