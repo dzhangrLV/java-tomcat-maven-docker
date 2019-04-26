@@ -153,7 +153,7 @@ RUN set -e \
 		exit 1; \
 	fi
 
-COPY --from=builder $BOXFUSE/boxfuse-sample-java-war-hello/target/*.war $CATALINA_HOME/webapps/
+COPY --from=builder /tmp/boxfuse/boxfuse-sample-java-war-hello/target/*.war $CATALINA_HOME/webapps/
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
