@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 as builder
+FROM debian:latest as builder
 MAINTAINER Leonid Gorshkov <dzhangr.lv@gmail.com>
 
 ENV BOXFUSE /tmp/boxfuse/
