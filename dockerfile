@@ -5,10 +5,9 @@ ENV BOXFUSE /tmp/boxfuse/
 RUN mkdir -p "$BOXFUSE"
 WORKDIR $BOXFUSE
 
-RUN apt-get update &&apt-get install -y git maven default-jdk \
+RUN apt-get update && apt-get install -y git maven default-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-#RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
 RUN set -e; \
     \
     git clone "https://github.com/boxfuse/boxfuse-sample-java-war-hello"; \
