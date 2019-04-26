@@ -8,7 +8,7 @@ WORKDIR $BOXFUSE
 RUN apt-get update
 RUN apt-get install -y git maven default-jdk
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
-RUN set -eux; \
+RUN set -e; \
     \
     cd "$BOXFUSE/boxfuse-sample-java-war-hello/"; \
     mvn package
