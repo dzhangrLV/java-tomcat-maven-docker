@@ -38,6 +38,14 @@ ENV TOMCAT_TGZ_URLS \
 # see https://www.apache.org/dist/tomcat/tomcat-8/KEYS
 RUN set -eux; \
         \
+	    apk add --no-cache --virtual .fetch-deps \
+		        gnupg \
+		        \
+		        ca-certificates \
+		        openssl \
+	    ; \
+	    \
+        export GNUPGHOME="$(mktemp -d)"; \
         for key in $GPG_KEYS; do \
 		gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	    done
