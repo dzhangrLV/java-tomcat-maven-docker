@@ -6,11 +6,12 @@ RUN mkdir -p "$BOXFUSE"
 WORKDIR $BOXFUSE
 
 RUN apt-get update &&apt-get install -y git maven default-jdk \
-        && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
+#RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
 RUN set -e; \
     \
+    git clone "https://github.com/boxfuse/boxfuse-sample-java-war-hello"; \
     cd "$BOXFUSE/boxfuse-sample-java-war-hello/"; \
     mvn package
 
@@ -18,6 +19,7 @@ RUN set -e; \
 # see https://github.com/docker-library/tomcat
 
 FROM openjdk:8-jre-alpine
+MAINTAINER Leonid Gorshkov <dzhangr.lv@gmail.com>
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -151,7 +153,7 @@ RUN set -e \
 		exit 1; \
 	fi
 
-COPY --from=builder /tmp/boxfuse/boxfuse-sample-java-war-hello/target/*.war $CATALINA_HOME/webapps/
+COPY --from=builder $BOXFUSE/boxfuse-sample-java-war-hello/target/*.war $CATALINA_HOME/webapps/
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
