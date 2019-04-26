@@ -1,15 +1,17 @@
 FROM ubuntu:16.04 as builder
 MAINTAINER Leonid Gorshkov <dzhangr.lv@gmail.com>
 
-ENV BOXFUSE /tmp/boxfuse
+ENV BOXFUSE /tmp/boxfuse/
 RUN mkdir -p "$BOXFUSE"
 WORKDIR $BOXFUSE
 
 RUN apt-get update
 RUN apt-get install -y git maven default-jdk
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
-RUN cd $BOXFUSE/boxfuse-sample-java-war-hello/
-RUN mvn package
+RUN set -eux; \
+    \
+    cd "$BOXFUSE/boxfuse-sample-java-war-hello/"; \
+    mvn package; \
 
 
 # see https://github.com/docker-library/tomcat
